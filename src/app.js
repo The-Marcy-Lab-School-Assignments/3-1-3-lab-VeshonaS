@@ -30,11 +30,19 @@ export default async function app(appDiv) {
   // renderNewUserForm;
 
   // Fetch the books!
+  const books = await getFirstThreeFantasyBooks()
+  console.log(books  )
   // const books =
   // render out the books
-  // renderBookList
+  renderBookList(bookListEl, books)
 
-  // bookListEl.addEventListener('???', () => {})
+  bookListEl.addEventListener('click', async (event) => {
+    if (event.target.tagName === 'BUTTON'){
+      const key = await getFirstThreeFantasyBooks.name.urlKey 
+      const authorInfo = await getAuthor(key)
+      renderAuthorInfo(authorInfo)
+    }
+  })
 
   // newUserFormEl.addEventListener('???', () => {})
 }
