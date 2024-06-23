@@ -52,7 +52,7 @@ export const getAuthor = async (urlKey) => {
   }
 };
 
-export const createNewUser = async (user) => {
+export const createNewUser = async(user) => {
   try {
     const res = await fetch('https://jsonplaceholder.typicode.com', { method:"POST", user })
     if (!res.ok){

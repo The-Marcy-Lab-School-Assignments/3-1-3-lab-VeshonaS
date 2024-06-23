@@ -27,7 +27,7 @@ export default async function app(appDiv) {
   newUserFormEl.id = 'new-user-form';
   appDiv.append(newUserFormEl);
   // Render the form!
-  // renderNewUserForm;
+  renderNewUserForm(createNewUser)
 
   // Fetch the books!
   const books = await getFirstThreeFantasyBooks()
@@ -44,5 +44,7 @@ export default async function app(appDiv) {
     }
   })
 
-  // newUserFormEl.addEventListener('???', () => {})
+  newUserFormEl.addEventListener('submit', (createNewUser) => {
+    renderNewUser()
+  })
 }
