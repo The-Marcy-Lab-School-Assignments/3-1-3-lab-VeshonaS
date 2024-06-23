@@ -1,3 +1,5 @@
+// import { post } from "fetch-mock";
+
 export const getFirstThreeFantasyBooks = async() => {
 
     try {
@@ -32,8 +34,9 @@ export const getAuthor = async (urlKey) => {
     if(!response.ok){
       throw new Error('Failed to get author')
     }
-    const data = response.json()
-    return data.slice(0, 3).map(author => {
+    const data = await response.json()
+    // not sure what to slice 
+    return data.author.slice(0, 3).map(author => {
       return {
           bio: author.bio,
           birthDate: author.birthDate,
@@ -49,5 +52,24 @@ export const getAuthor = async (urlKey) => {
   }
 };
 
-export const createNewUser = () => {
+export const createNewUser = async (user) => {
+  try {
+    const res = await fetch('https://jsonplaceholder.typicode.com', { method:"POST", user })
+    if (!res.ok){
+      throw new Error('Failed to create new user')
+    }
+    const data = await res.json()
+    return data.map(newUser => {
+     return  {
+        username: newUser.username,
+        isCool: newUser.isTrue ,
+        favoriteLanguage: newUser.favoriteLanguage ,
+        id:newUser.id 
+      }
+    })
+  }
+  catch(error) {
+    console.warn(error.message)
+    return null 
+  }
 }

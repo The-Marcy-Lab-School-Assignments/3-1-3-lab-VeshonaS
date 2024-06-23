@@ -40,6 +40,24 @@ export const renderAuthorInfo = (authorInfoEl, author) => {
 }
 
 export const renderNewUserForm = (newUserFormEl) => {
+  // make form
+  const form = document.createElement('form ')
+  const usernameLabel = document.createElement('label')
+  const usernameInput = document.createElement('input')
+  const coolLabel = document.createElement('label')
+  const coolInput = document.createElement('input')
+  const langLabel = document.createElement('label')
+  const langSelect = document.createElement('select')
+  const button = document.createElement('button')
+// specify elements 
+  usernameInput.setAttribute('id','username')
+  usernameInput.setAttribute('name', 'username')
+  coolInput.setAttribute('id', 'is-cool')
+  coolInput.setAttribute('name', 'isCool')
+  langSelect.setAttribute('id', 'favorite-language')
+  langSelect.setAttribute('name', 'favoriteLanguage')
+  button.textContent = "Create User"
+  // 
 }
 
 export const renderNewUser = (newUserEl, newUser) => {

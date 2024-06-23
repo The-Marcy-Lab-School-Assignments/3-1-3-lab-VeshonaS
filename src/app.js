@@ -38,7 +38,7 @@ export default async function app(appDiv) {
 
   bookListEl.addEventListener('click', async (event) => {
     if (event.target.tagName === 'BUTTON'){
-      const key = await getFirstThreeFantasyBooks.name.urlKey 
+       const key = '/authors/OL22028A'
       const authorInfo = await getAuthor(key)
       renderAuthorInfo(authorInfo)
     }
