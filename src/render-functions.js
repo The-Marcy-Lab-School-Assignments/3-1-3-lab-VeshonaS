@@ -10,7 +10,7 @@ export const renderBookList = (bookListEl, books) => {
   img.alt = `An old cover of ${book.title}`
   p.textContent =  `Title: ${book.title}`
   button.textContent = `View ${book.author.name}`
-  button.dataset.authorURLKey = book.author.urlKey
+  button.dataset.authorUrlKey = book.author.urlKey
 
   li.append(img, p, button)
   bookListEl.append(li)
@@ -19,60 +19,47 @@ export const renderBookList = (bookListEl, books) => {
 
 export const renderAuthorInfo = (authorInfoEl, author) => {
   authorInfoEl.innerHTML = '';
-  author.forEach(auth => {
     // made structure 
-    const h2 = createElement('h2')
-    const img = createElement('img')
-    const p = createElement('p')
-    const pTag = createElement('p')
-    const link = createElement('a')
+    const h2 = document.createElement('h2')
+    const img = document.createElement('img')
+    const p = document.createElement('p')
+    const pTag = document.createElement('p')
+    const link = document.createElement('a')
     // add value 
-    h2.textContent = auth.name 
-    img.src = auth.picture 
-    img.alt =`A picture of ${auth.name}`
-    p.textContent = `Born:${auth.birthDate}`
-    pTag.textContent = auth.bio 
-    link.textContent = `Wikipedia Link: ${auth.wikipediaUrl}`
+    h2.textContent = author.name 
+    img.src = author.pictureUrl
+    img.alt =`A picture of ${author.name}`
+    p.textContent = `Born: ${author.birthDate}`
+    pTag.textContent = author.bio 
+    link.textContent = `Wikipedia Link`
+    link.href = author.wikipediaUrl
     // add to div 
     authorInfoEl.append(h2, img, p, pTag, link)
     
-  })
+
 }
 
-export const renderNewUserForm = (newUserFormEl) => {
+export const renderNewUserForm = (form) => {
   // make form
-  const form = document.createElement('form ')
-  const usernameLabel = document.createElement('label')
-  const usernameInput = document.createElement('input')
-  const coolLabel = document.createElement('label')
-  const coolInput = document.createElement('input')
-  const langLabel = document.createElement('label')
-  const langSelect = document.createElement('select')
-  const button = document.createElement('button')
-// specify elements 
-  usernameInput.setAttribute('id','username')
-  usernameInput.setAttribute('name', 'username')
-  coolInput.setAttribute('id', 'is-cool')
-  coolInput.setAttribute('name', 'isCool')
-  coolInput.setAttribute('type', 'Checkbox ')
-  langSelect.setAttribute('id', 'favorite-language')
-  langSelect.setAttribute('name', 'favoriteLanguage')
-  button.textContent = "Create User"
-  // select
-  const langArray = ['None', 'JavaScript', 'Python', 'Ruby ']
-  for (let i = 0; i < langArray.length; i++){
-    let options = document.createElement('option')
-    options.value = langArray[i]
-    options.text = langArray[i]
-    langSelect.appendChild(options)
-    // appending 
-    form.append(usernameLabel, usernameInput, coolLabel, coolInput,langLabel,langSelect,button)
-    newUserFormEl.append(form)
-  }
+ form.innerHTML = `
+ <label for='username'>Username</label>
+ <input id="username" name="username">
+ <label for='is-cool'>Is this user cool?</label>
+ <input id="is-cool" name="isCool" type='checkbox'>
+ <label for='favorite-language'>Favorite Language</label>
+ <select id="favorite-language" name="favoriteLanguage">
+ <option>None</option>
+ <option>JavaScript</option>
+ <option>Python</option>
+ <option>Ruby</option>
+ </select>
+<button>Create User</button>
+ `
+
 }
 
 export const renderNewUser = (newUserEl, newUser) => {
-  newUserEl.innerHTML = ''
+  newUserEl.innerHTML = '';
 // make elements 
 const h2 = document.createElement('h2')
 const p = document.createElement('p')
@@ -85,7 +72,7 @@ if (newUser.isCool === true) {
 } else {
   p.textContent = 'A real square.'
 }
-pTag.textContent = newUser.favoriteLanguage 
+pTag.textContent = `Favorite Language: ${newUser.favoriteLanguage}`
 // append 
 newUserEl.append(h2, p , pTag)
 }

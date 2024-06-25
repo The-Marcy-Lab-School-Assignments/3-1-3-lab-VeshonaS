@@ -36,15 +36,13 @@ export const getAuthor = async (urlKey) => {
     }
     const data = await response.json()
     // not sure what to slice 
-    return data.author.slice(0, 3).map(author => {
-      return {
-          bio: author.bio,
-          birthDate: author.birthDate,
-          name: author.name,
-          pictureUrl: `https://covers.openlibrary.org/a/id/${author.pictureUrl}-M.jpg`,
-          wikipediaLink: author.wikipediaLink
-      }
-    })
+    return {
+      birthDate: data.birth_date, 
+      bio: data.bio,
+  wikipediaUrl: data.wikipedia,
+  name: data.name,
+  pictureUrl: `https://covers.openlibrary.org/a/id/${data.photos[0]}-M.jpg`,
+    }
   }
   catch(error){
     console.warn(error.message)
@@ -54,19 +52,12 @@ export const getAuthor = async (urlKey) => {
 
 export const createNewUser = async(user) => {
   try {
-    const res = await fetch('https://jsonplaceholder.typicode.com', { method:"POST", user })
+    const res = await fetch('https://jsonplaceholder.typicode.com/users', { method:"POST", user })
     if (!res.ok){
       throw new Error('Failed to create new user')
     }
     const data = await res.json()
-    return data.map(newUser => {
-     return  {
-        username: newUser.username,
-        isCool: newUser.isTrue ,
-        favoriteLanguage: newUser.favoriteLanguage ,
-        id:newUser.id 
-      }
-    })
+    return data
   }
   catch(error) {
     console.warn(error.message)

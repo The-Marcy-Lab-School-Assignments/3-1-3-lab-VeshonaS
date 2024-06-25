@@ -38,13 +38,19 @@ export default async function app(appDiv) {
 
   bookListEl.addEventListener('click', async (event) => {
     if (event.target.tagName === 'BUTTON'){
-       const key = '/authors/OL22028A'
+       const key = event.target.dataset.authorUrlKey
       const authorInfo = await getAuthor(key)
-      renderAuthorInfo(authorInfo)
+      renderAuthorInfo(authorInfoEl, authorInfo)
     }
   })
+  renderNewUserForm(newUserFormEl)
 
-  newUserFormEl.addEventListener('submit', (createNewUser) => {
-    renderNewUser()
+  newUserFormEl.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const newForm = new FormData(e.target);
+    const data = Object.fromEntries(newForm)
+     const newUser = await createNewUser(data);
+
+     renderNewUser(newUserEl, newUser)
   })
 }
